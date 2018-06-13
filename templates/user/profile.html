@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} User Profile {% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>{{ user.username }}</h1>
+        {% if user.name or user.location %}
+            <p>
+                {% if user.name %}{{ user.name }}{% endif %}
+                {% if user.location %}
+                    From <a href="http://maps.google.com/?q={{ user.location }}">
+                    {{ user.location }}
+                </a>
+                {% endif %}
+            </p>
+        {% endif %}
+        {% if user and current_user.check_admin() %}
+            <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+        {% endif %}
+        {% if user.desc %}<p>{{ user.desc }}</p>{% endif %}
+        <p>
+            Member since {{ moment(user.member_since).format('L') }}.
+            Last visited {{ moment(user.last_visit).fromNow() }}.
+        </p>
+        {% if current_user.username == user.username %}
+            <a class="btn btn-default" href="{{ url_for('edit_profile') }}">Edit Profile</a>
+        {% endif %}
+    </div>
+{% endblock %}
