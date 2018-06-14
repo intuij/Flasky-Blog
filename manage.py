@@ -8,6 +8,7 @@ from user.models import User, AnonymousUser
 ###### Very important!!!!!!!! Otherwise all 404!!!!!!!
 from main import views
 from user import views
+from article import views
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
