@@ -3,7 +3,7 @@ from flask_script import Manager, Server
 from flask_migrate import MigrateCommand
 from init import app
 from flask_login import LoginManager
-from user.models import User
+from user.models import User, AnonymousUser
 
 ###### Very important!!!!!!!! Otherwise all 404!!!!!!!
 from main import views
@@ -17,6 +17,7 @@ manager.add_command('db', MigrateCommand)
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'login'
+login_manager.anonymous_user = AnonymousUser
 login_manager.init_app(app)
 
 

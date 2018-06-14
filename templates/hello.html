@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
+{% import "_macros.html" as macros %}
 
 {% block title %} Hello {% endblock %}
 {% block page_content %}
@@ -27,10 +28,19 @@
                             {{ post.author.username }}
                         </a>
                     </div>
-                    <div class="post-body">{{ post.content }}</div>
+                    <div class="post-body">
+                        {% if post.body_html %}
+                            {{ post.body_html | safe}}
+                        {% else %}
+                            {{ post.content }}
+                        {% endif %}
+                    </div>
                 </li>
                 <hr />
             {% endfor %}
         </ul>
+    </div>
+    <div class="paging">
+        {{ macros.pagination_widget(pagination, 'index') }}
     </div>
 {% endblock %}

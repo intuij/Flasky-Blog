@@ -4,6 +4,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from article.forms import *
 from init import app
 from user.decorators import admin_required
+from article.models import Post
 
 
 @app.route('/login', methods=['GET', 'POST'])
